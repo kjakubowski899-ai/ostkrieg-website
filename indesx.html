@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ostkrieg — personal site</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  color: #1a1a1a;
+  min-height: 100vh;
+  background-color: #c8bfb0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(100,90,75,0.13) 39px, rgba(100,90,75,0.13) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(100,90,75,0.10) 39px, rgba(100,90,75,0.10) 40px);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+a { color: #1a3a7a; text-decoration: underline; }
+a:hover { color: #c00020; }
+
+#page {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 14px 10px 40px;
+}
+
+/* ── HEADER ── */
+#header {
+  background: linear-gradient(180deg, #ede6db 0%, #ddd4c4 100%);
+  border: 3px solid #8a7a62;
+  border-bottom: none;
+  padding: 10px 14px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#sitename {
+  font-family: 'Special Elite', monospace;
+  font-size: 46px;
+  color: #2a1f14;
+  letter-spacing: 4px;
+  line-height: 1;
+  text-shadow: 2px 2px 0 #ffffff66;
+}
+
+#tagline {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #7a5a38;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.hit-counter {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #6a4a28;
+  background: #ede6db;
+  border: 1px solid #a08060;
+  padding: 2px 8px;
+  font-family: 'Courier Prime', monospace;
+}
+.hit-counter b { color: #3a2010; }
+#live-count { color: #3a2010; font-weight: bold; font-family: 'Courier Prime', monospace; }
+
+/* ── NAV BAR ── */
+#nav {
+  background: linear-gradient(180deg, #d8cfc0 0%, #c8bfb0 100%);
+  border: 3px solid #8a7a62;
+  border-top: 2px solid #d0c8b8;
+  border-bottom: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 8px;
+}
+
+#nav a {
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  background: linear-gradient(180deg, #ede6db 0%, #d8cfc0 100%);
+  border: 2px outset #a09080;
+  color: #2a1f14;
+  padding: 3px 12px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.05s;
+  white-space: nowrap;
+}
+#nav a:hover { background: linear-gradient(180deg, #d8cfc0 0%, #c8b8a8 100%); border-style: inset; color: #000; }
+#nav a.on { background: linear-gradient(180deg, #c8b8a8 0%, #b8a898 100%); border-style: inset; color: #000; }
+
+/* ── THREE COLUMN LAYOUT ── */
+#cols {
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+  border: 3px solid #8a7a62;
+  border-top: none;
+  background: rgba(237,230,219,0.96);
+  min-height: 500px;
+}
+
+.sidebar { background: rgba(224,216,200,0.97); padding: 0; border-color: #a09070; }
+#sidebar-left { border-right: 2px solid #b0a080; }
+#sidebar-right { border-left: 2px solid #b0a080; }
+
+.sb { border-bottom: 1px dashed #8aacca; padding: 8px 8px; }
+.sb:last-child { border-bottom: none; }
+
+.sb-t {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  color: #fff;
+  background: linear-gradient(90deg, #7a6040, #6a5030);
+  border: 2px outset #9a8060;
+  padding: 2px 8px;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 6px;
+  display: block;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #3a2010;
+}
+
+.sb p, .sb li { font-size: 11px; color: #3a2a1a; line-height: 1.9; list-style: none; }
+.sb li::before { content: "» "; color: #8a5a30; }
+.sb em { color: #8a0020; font-style: italic; }
+.sb a { color: #5a3a1a; font-size: 11px; }
+.sb a:hover { color: #c00020; }
+
+.sb-img { width: 100%; display: block; border: 1px solid #8aacca; margin: 4px 0; }
+
+#badges { display: flex; flex-wrap: wrap; gap: 2px; }
+#badges img { image-rendering: pixelated; display: block; opacity: 0.85; transition: opacity 0.1s; width: 88px; height: 31px; }
+#badges img:hover { opacity: 1; }
+
+.update-entry { margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dotted #b0a080; font-size: 11px; line-height: 1.7; }
+.update-date { font-family: 'Special Elite', monospace; font-size: 10px; color: #3a2010; font-weight: bold; letter-spacing: 1px; }
+.update-entry p { color: #3a2a1a; }
+
+.todo-item { font-size: 11px; color: #3a2a1a; line-height: 2; list-style: none; }
+.todo-item::before { content: "☐ "; color: #8a6040; }
+.todo-done { text-decoration: line-through; color: #aaa; }
+.todo-done::before { content: "☑ "; color: #3a8a3a; }
+
+/* ── MAIN CONTENT ── */
+#main { padding: 10px 12px; background: rgba(242,236,226,0.97); }
+
+.main-box {
+  background: rgba(255,252,246,0.92);
+  background-image: radial-gradient(circle, rgba(120,100,70,0.1) 1px, transparent 1px);
+  background-size: 10px 10px;
+  border: 2px solid #b0a080;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.sh {
+  font-family: 'Special Elite', monospace;
+  font-size: 13px;
+  color: #fff;
+  background: linear-gradient(90deg, #6a5030, #5a4020);
+  border: 2px outset #8a7050;
+  padding: 3px 12px;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  display: inline-block;
+  text-shadow: 1px 1px 0 #2a1808;
+}
+
+.mt { font-size: 12px; color: #2a1f14; line-height: 1.9; margin-bottom: 8px; }
+.mt em { color: #8a0020; font-style: italic; }
+.mt b { color: #3a2010; }
+
+.fr { float: right; margin: 0 0 10px 12px; border: 2px solid #b0a080; background: #fff; padding: 3px; }
+.fl { float: left; margin: 0 12px 10px 0; border: 2px solid #b0a080; background: #fff; padding: 3px; }
+.cf::after { content:''; display:table; clear:both; }
+
+.icap { font-size: 10px; color: #7a6050; font-style: italic; text-align: center; display: block; margin-top: 2px; }
+
+.ww { background: #ede4d4; border: 2px solid #b0a070; padding: 10px 12px; margin: 8px 0; }
+.ww::before { content: ''; display: block; height: 3px; background: repeating-linear-gradient(90deg, #7a6040 0px, #7a6040 8px, #fff 8px, #fff 12px); margin-bottom: 8px; }
+.wt { font-family: 'Special Elite', monospace; font-size: 10px; color: #3a2010; letter-spacing: 4px; margin-bottom: 5px; }
+.wa { font-family: 'Courier Prime', monospace; font-size: 11px; color: #1a1a0a; word-break: break-all; line-height: 1.6; margin-bottom: 7px; background: #fff; border: 1px solid #c0b090; padding: 5px 7px; }
+.wa.tbd { color: #9a8a6a; font-style: italic; }
+.cb { font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 2px; background: linear-gradient(180deg, #ede4d4 0%, #d8cbb8 100%); color: #2a1f14; border: 2px outset #a09070; padding: 3px 12px; cursor: pointer; transition: all 0.05s; }
+.cb:hover { background: linear-gradient(180deg, #d8cbb8 0%, #c8b8a0 100%); border-style: inset; }
+.cb.ok { background: #c8f0c8; border-color: #6aaa6a; color: #1a4a1a; }
+.wnote { font-size: 10px; color: #7a6050; font-style: italic; margin: 5px 0 10px; }
+
+.link-entry { border-bottom: 1px dotted #b0a080; padding: 6px 0; font-size: 11px; }
+.link-entry a { font-size: 12px; font-family: 'Special Elite', monospace; letter-spacing: 1px; color: #5a3a1a; }
+.link-entry a:hover { color: #c00020; }
+.link-entry p { color: #7a6050; margin-top: 2px; }
+
+.section { display: none; }
+.section.active { display: block; }
+
+.blink { animation: bl 1s step-end infinite; }
+@keyframes bl { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+#footer {
+  background: linear-gradient(180deg, #d8cfc0 0%, #c8bfb0 100%);
+  border: 3px solid #8a7a62;
+  border-top: 2px solid #d0c8b8;
+  color: #5a4a30;
+  text-align: center;
+  padding: 8px;
+  letter-spacing: 3px;
+  font-family: 'Special Elite', monospace;
+  font-size: 13px;
+}
+#footer a { color: #5a3a1a; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #c8bfb0; }
+::-webkit-scrollbar-thumb { background: #8a7a62; border: 1px solid #6a5a42; }
+::selection { background: #8a6040; color: #fff; }
+
+/* ── MOBILE ── */
+@media (max-width: 680px) {
+  #page { padding: 0 0 40px; }
+
+  #header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  #sitename { font-size: 32px; letter-spacing: 2px; }
+  #tagline { font-size: 10px; letter-spacing: 2px; }
+
+  #header > div:nth-child(2) {
+    padding-left: 0 !important;
+    gap: 6px;
+  }
+  #header > div:nth-child(2) img { height: 52px !important; }
+
+  .header-right { align-items: flex-start; }
+  .hit-counter { font-size: 10px; }
+
+  #nav a { font-size: 13px; padding: 6px 14px; }
+
+  #cols {
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar-left { order: 2; border-right: none; border-top: 2px solid #b0a080; }
+  #main         { order: 1; }
+  #sidebar-right { order: 3; border-left: none; border-top: 2px solid #b0a080; }
+
+  .sb-img { max-height: 160px; object-fit: cover; }
+
+  #badges img { width: 88px; height: 31px; }
+
+  .fr, .fl {
+    float: none !important;
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 100px;
+  }
+
+  .wa { font-size: 10px; }
+  .cb { font-size: 11px; padding: 5px 14px; }
+
+  #footer { font-size: 11px; letter-spacing: 1px; }
+}
+</style>
+</head>
+<body>
+
+<div id="page">
+
+  <!-- HEADER -->
+  <div id="header">
+    <div>
+      <div id="sitename">ostkrieg</div>
+      <div id="tagline">* personal site * est. 2022 * <span class="blink">|</span></div>
+    </div>
+    <!-- flags -->
+    <div style="flex:1; display:flex; justify-content:flex-start; align-items:center; gap:8px; padding-left:16px;">
+      <img src="8c1.jpg" alt="appeal to heaven" title="appeal to heaven"
+           style="height:80px; border:2px solid #8a7a62; padding:3px; background:#ede6db; box-shadow:2px 2px 5px rgba(0,0,0,0.15);">
+      <img src="rhodesia.jpg" alt="rhodesia" title="rhodesia"
+           style="height:80px; border:2px solid #8a7a62; padding:3px; background:#ede6db; box-shadow:2px 2px 5px rgba(0,0,0,0.15);">
+    </div>
+    <div class="header-right">
+      <div class="hit-counter">visitors: <b id="live-count">...</b></div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div id="nav">
+    <a href="#" class="on" onclick="show('home',this);return false;">home</a>
+    <a href="#" onclick="show('donate',this);return false;">donate</a>
+    <a href="#" onclick="show('about',this);return false;">extra</a>
+  </div>
+
+  <!-- THREE COLUMNS -->
+  <div id="cols">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar" id="sidebar-left">
+      <div class="sb">
+        <span class="sb-t">last update</span>
+        <p>sometime in 2022<br>site is live.<br>wallets are up.</p>
+      </div>
+      <div class="sb">
+        <span class="sb-t">status</span>
+        <p>
+          ♦ still here<br>
+          ♦ building slowly<br>
+          ♦ no rush<br>
+          ♦ no ads ever
+        </p>
+      </div>
+      <div class="sb">
+        <span class="sb-t">song rn</span>
+        <p>moonlight sonata<br>op. 27 no. 2<br><em>— beethoven</em></p>
+      </div>
+      <div class="sb">
+        <span class="sb-t">elsewhere</span>
+        <ul>
+          <li><a href="https://wiby.me" target="_blank">wiby.me</a></li>
+          <li><a href="https://are.na" target="_blank">are.na</a></li>
+          <li><a href="https://archive.org" target="_blank">archive.org</a></li>
+        </ul>
+      </div>
+      <div class="sb" style="text-align:center;">
+        <p style="font-size:10px;color:#5a7a9a;font-style:italic;margin-top:3px;">this is me online</p>
+      </div>
+      <div class="sb">
+        <span class="sb-t">88×31</span>
+        <div id="badges">
+          <img src="https://caitsith.neocities.org/buttons/dumbwebmaster.gif" width="88" height="31" alt="dumb webmaster">
+          <img src="https://s4t1nr1bb0nz.neocities.org/buttons/sanehtml.gif" width="88" height="31" alt="sane html">
+          <img src="https://baccyflap.com/noai/miniwidget14.gif" width="88" height="31" alt="no ai">
+          <img src="https://s4t1nr1bb0nz.neocities.org/buttons/internetprivacy.gif" width="88" height="31" alt="internet privacy">
+          <img src="https://caitsith.neocities.org/xpbutton.gif" width="88" height="31" alt="i miss xp">
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main">
+
+      <!-- HOME -->
+      <div id="home" class="section active">
+        <div class="main-box">
+          <div class="sh">welcome! ✦</div>
+          <div class="cf">
+            <img class="fr" src="wow.jpg" alt="" style="width:130px;">
+            <p class="mt">
+              hey. ostkrieg's site. made it so i'd have somewhere online that's actually <b>mine.</b> not a profile. not a platform that can pull the plug.
+            </p>
+            <p class="mt">
+              i work in security. been at it a while. pays well. wallets are up on the donate page if you want to send something over.
+            </p>
+            <p class="mt">
+              look around. you were here.
+            </p>
+          </div>
+        </div>
+        <div class="main-box">
+          <div class="sh">donate / send crypto</div>
+          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever, even small stuff lands.</p>
+          <div class="ww">
+            <div class="wt">BITCOIN — BTC</div>
+            <div class="wa" id="btcaddr2">bc1qxhmhqwhra63prx5rf479fkzu5uwjkk5kzpfef4</div>
+            <button class="cb" onclick="cp('btcaddr2',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">ETHEREUM — ETH</div>
+            <div class="wa" id="ethaddr2">0x280c2Bc9433fB3914a04eB48D88ab5027218B115</div>
+            <button class="cb" onclick="cp('ethaddr2',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">SOLANA — SOL</div>
+            <div class="wa" id="soladdr2">AWbJgRwSHEC4e9q4MpditawBvSn36vV8vSiUGUJ4SMtp</div>
+            <button class="cb" onclick="cp('soladdr2',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">XRP — XRP</div>
+            <div class="wa" id="xrpaddr2">raoP5cn3JQ5xaQNrGV3kbn37jQG1HktYwE</div>
+            <button class="cb" onclick="cp('xrpaddr2',this)">copy address</button>
+          </div>
+          <p class="wnote">* only i hold the keys. not a service. just a wallet.</p>
+        </div>
+
+      </div>
+
+      <!-- ABOUT/EXTRA -->
+      <div id="about" class="section">
+        <div class="main-box">
+          <div class="sh">extra</div>
+          <div class="cf">
+            <img class="fl" src="runi.jpg" alt="" style="width:110px;">
+            <p class="mt">i go by <em>ostkrieg</em>. this site exists because the rest of the internet belongs to someone else.</p>
+            <p class="mt">networks, systems, finding things people don't want found. been at it long enough that it's just how i see things now. money's fine. not something i think about.</p>
+            <p class="mt">old web, crypto, history, photography. hand coded. no builders no templates. wallets on the donate page if you want to send something.</p>
+          </div>
+        </div>
+        <div class="main-box">
+          <div class="sh">links</div>
+          <div style="margin-top:8px;">
+            <div class="link-entry"><a href="https://wiby.me" target="_blank">wiby.me</a><p>search engine for old-school hand-made websites only. a time machine.</p></div>
+            <div class="link-entry"><a href="https://are.na" target="_blank">are.na</a><p>moodboarding and research without the noise or the algorithm.</p></div>
+            <div class="link-entry"><a href="https://www.coinbase.com" target="_blank">coinbase</a><p>easiest way to get crypto if you're new to it.</p></div>
+            <div class="link-entry"><a href="https://archive.org" target="_blank">internet archive</a><p>the whole internet, preserved. everything lives here.</p></div>
+          </div>
+        </div>
+        <div class="main-box">
+          <div class="sh">contact</div>
+          <div class="cf">
+            <img class="fr" src="c28.jpg" alt="" style="width:110px;">
+            <p class="mt">if you want to reach me, you already know how.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DONATE -->
+      <div id="donate" class="section">
+        <div class="main-box">
+          <div class="sh">donate / send crypto</div>
+          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever, even small stuff lands.</p>
+          <div class="ww">
+            <div class="wt">BITCOIN — BTC</div>
+            <div class="wa" id="btcaddr">bc1qxhmhqwhra63prx5rf479fkzu5uwjkk5kzpfef4</div>
+            <button class="cb" onclick="cp('btcaddr',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">ETHEREUM — ETH</div>
+            <div class="wa" id="ethaddr">0x280c2Bc9433fB3914a04eB48D88ab5027218B115</div>
+            <button class="cb" onclick="cp('ethaddr',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">SOLANA — SOL</div>
+            <div class="wa" id="soladdr">AWbJgRwSHEC4e9q4MpditawBvSn36vV8vSiUGUJ4SMtp</div>
+            <button class="cb" onclick="cp('soladdr',this)">copy address</button>
+          </div>
+          <div class="ww">
+            <div class="wt">XRP — XRP</div>
+            <div class="wa" id="xrpaddr">raoP5cn3JQ5xaQNrGV3kbn37jQG1HktYwE</div>
+            <button class="cb" onclick="cp('xrpaddr',this)">copy address</button>
+          </div>
+          <p class="wnote">* only i hold the keys. not a service. just a wallet.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="sidebar" id="sidebar-right">
+      <div class="sb">
+        <span class="sb-t">updates</span>
+        <div class="update-entry">
+          <div class="update-date">2022.12.14</div>
+          <p>wallets live. site up.</p>
+        </div>
+        <div class="update-entry">
+          <div class="update-date">2022.11.20</div>
+          <p>site goes live.</p>
+        </div>
+      </div>
+      <div class="sb">
+        <span class="sb-t">to-do</span>
+        <ul>
+          <li class="todo-item todo-done">launch site</li>
+          <li class="todo-item todo-done">add btc wallet</li>
+          <li class="todo-item">add eth wallet</li>
+          <li class="todo-item">add more gallery</li>
+          <li class="todo-item">write about page</li>
+          <li class="todo-item">add music embed</li>
+          <li class="todo-item">get more 88x31s</li>
+        </ul>
+      </div>
+      <div class="sb">
+        <img class="sb-img" src="gty_.jpg" alt="">
+      </div>
+      <div class="sb">
+        <img class="sb-img" src="7a3.jpg" alt="">
+        <span class="icap">from the archive</span>
+      </div>
+      <div class="sb">
+        <span class="sb-t">weather</span>
+        <p style="font-size:11px;color:#2a3a5a;">☁ cloudy somewhere<br>🌱 grass is green<br>🌊 vibes: hell yh</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer">
+    ostkrieg &nbsp;·&nbsp; made by hand &nbsp;·&nbsp; you were here &nbsp;·&nbsp; <span class="blink">✦</span>
+  </div>
+
+</div>
+
+<script>
+// ── VISITOR COUNTER ──
+// Uses a free public API (api.countapi.xyz) to persist and increment
+// a real visit count across all visitors.
+// Starting seed is 2418 so the first real visit begins from there.
+(function() {
+  var NAMESPACE = 'ostkrieg-site';
+  var KEY = 'visitors';
+  var SEED = 2418;
+  var el = document.getElementById('live-count');
+
+  // countapi.xyz: hit increments on every page load and returns new count
+  fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      // d.value starts at 1 on a fresh key, so we add the seed offset
+      var count = (d.value || 1) + SEED - 1;
+      el.textContent = count.toLocaleString();
+    })
+    .catch(function(){
+      // fallback: just show the seed so it never shows "..."
+      el.textContent = SEED.toLocaleString();
+    });
+})();
+
+// ── NAV ──
+function show(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#nav a').forEach(a => a.classList.remove('on'));
+  el.classList.add('on');
+  window.scrollTo(0,0);
+}
+
+// ── COPY WALLET ──
+function cp(id, btn) {
+  var t = document.getElementById(id).textContent.trim();
+  if (t.startsWith('coming')) {
+    btn.textContent = 'not set yet';
+    setTimeout(() => btn.textContent='copy address', 1500);
+    return;
+  }
+  navigator.clipboard.writeText(t).then(() => {
+    btn.textContent = 'copied!';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent='copy address'; btn.classList.remove('ok'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
