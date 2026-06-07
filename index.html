@@ -238,7 +238,6 @@ a:hover { color: #c00020; }
 @media (max-width: 680px) {
   #page { padding: 0 0 40px; }
 
-  /* header stacks vertically */
   #header {
     flex-direction: column;
     align-items: flex-start;
@@ -248,21 +247,17 @@ a:hover { color: #c00020; }
   #sitename { font-size: 32px; letter-spacing: 2px; }
   #tagline { font-size: 10px; letter-spacing: 2px; }
 
-  /* flags row */
   #header > div:nth-child(2) {
     padding-left: 0 !important;
     gap: 6px;
   }
   #header > div:nth-child(2) img { height: 52px !important; }
 
-  /* counter moves under flags */
   .header-right { align-items: flex-start; }
   .hit-counter { font-size: 10px; }
 
-  /* nav wraps naturally, make buttons bigger to tap */
   #nav a { font-size: 13px; padding: 6px 14px; }
 
-  /* single column — main first, sidebars below */
   #cols {
     display: flex;
     flex-direction: column;
@@ -271,13 +266,10 @@ a:hover { color: #c00020; }
   #main         { order: 1; }
   #sidebar-right { order: 3; border-left: none; border-top: 2px solid #b0a080; }
 
-  /* sidebar images full width but not too tall */
   .sb-img { max-height: 160px; object-fit: cover; }
 
-  /* badges wrap nicely */
   #badges img { width: 88px; height: 31px; }
 
-  /* floated images in content — stop floating on small screens */
   .fr, .fl {
     float: none !important;
     display: block;
@@ -285,11 +277,9 @@ a:hover { color: #c00020; }
     width: 100px;
   }
 
-  /* wallet address box readable */
   .wa { font-size: 10px; }
   .cb { font-size: 11px; padding: 5px 14px; }
 
-  /* footer */
   #footer { font-size: 11px; letter-spacing: 1px; }
 }
 </style>
@@ -312,16 +302,15 @@ a:hover { color: #c00020; }
            style="height:80px; border:2px solid #8a7a62; padding:3px; background:#ede6db; box-shadow:2px 2px 5px rgba(0,0,0,0.15);">
     </div>
     <div class="header-right">
-      <div class="hit-counter">visitors: <img src="https://count.getloli.com/get/@ostkrieg?theme=moebooru" alt="visitor count" style="height:16px;vertical-align:middle;border:none;box-shadow:none;padding:0;background:none;image-rendering:pixelated;"></div>
+      <div class="hit-counter">visitors: <b id="live-count">...</b></div>
     </div>
   </div>
 
   <!-- NAV -->
   <div id="nav">
     <a href="#" class="on" onclick="show('home',this);return false;">home</a>
-    <a href="#" onclick="show('about',this);return false;">about</a>
     <a href="#" onclick="show('donate',this);return false;">donate</a>
-    <a href="#" onclick="show('links',this);return false;">links</a>
+    <a href="#" onclick="show('about',this);return false;">extra</a>
   </div>
 
   <!-- THREE COLUMNS -->
@@ -379,10 +368,10 @@ a:hover { color: #c00020; }
           <div class="cf">
             <img class="fr" src="wow.jpg" alt="" style="width:130px;">
             <p class="mt">
-              hey. this is <em>ostkrieg's</em> site. made it because i wanted somewhere online that was actually <b>mine</b> — not a profile, not an account someone else controls. just a page. this one.
+              hey. ostkrieg's site. made it so i'd have somewhere online that's actually <b>mine.</b> not a profile. not a platform that can pull the plug.
             </p>
             <p class="mt">
-              not a lot here right now. the main thing is the <b>wallet addresses</b> on the donate page so people have somewhere to send things. the rest will come when it comes.
+              i work in security. been at it a while. pays well. wallets are up on the donate page if you want to send something over.
             </p>
             <p class="mt">
               look around. you were here.
@@ -391,7 +380,7 @@ a:hover { color: #c00020; }
         </div>
         <div class="main-box">
           <div class="sh">donate / send crypto</div>
-          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever — even small stuff lands.</p>
+          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever, even small stuff lands.</p>
           <div class="ww">
             <div class="wt">BITCOIN — BTC</div>
             <div class="wa" id="btcaddr2">bc1qxhmhqwhra63prx5rf479fkzu5uwjkk5kzpfef4</div>
@@ -417,15 +406,31 @@ a:hover { color: #c00020; }
 
       </div>
 
-      <!-- ABOUT -->
+      <!-- ABOUT/EXTRA -->
       <div id="about" class="section">
         <div class="main-box">
-          <div class="sh">about me</div>
+          <div class="sh">extra</div>
           <div class="cf">
             <img class="fl" src="runi.jpg" alt="" style="width:110px;">
             <p class="mt">i go by <em>ostkrieg</em>. this site exists because the rest of the internet belongs to someone else.</p>
-            <p class="mt">into <b>old web aesthetics</b>, crypto, history, photography, and making things feel real. this site is hand-coded from scratch. no templates, no builders.</p>
-            <p class="mt">if you want to support the work or just send something my way — wallets are on the donate page.</p>
+            <p class="mt">networks, systems, finding things people don't want found. been at it long enough that it's just how i see things now. money's fine. not something i think about.</p>
+            <p class="mt">old web, crypto, history, photography. hand coded. no builders no templates. wallets on the donate page if you want to send something.</p>
+          </div>
+        </div>
+        <div class="main-box">
+          <div class="sh">links</div>
+          <div style="margin-top:8px;">
+            <div class="link-entry"><a href="https://wiby.me" target="_blank">wiby.me</a><p>search engine for old-school hand-made websites only. a time machine.</p></div>
+            <div class="link-entry"><a href="https://are.na" target="_blank">are.na</a><p>moodboarding and research without the noise or the algorithm.</p></div>
+            <div class="link-entry"><a href="https://www.coinbase.com" target="_blank">coinbase</a><p>easiest way to get crypto if you're new to it.</p></div>
+            <div class="link-entry"><a href="https://archive.org" target="_blank">internet archive</a><p>the whole internet, preserved. everything lives here.</p></div>
+          </div>
+        </div>
+        <div class="main-box">
+          <div class="sh">contact</div>
+          <div class="cf">
+            <img class="fr" src="c28.jpg" alt="" style="width:110px;">
+            <p class="mt">if you want to reach me, you already know how.</p>
           </div>
         </div>
       </div>
@@ -434,7 +439,7 @@ a:hover { color: #c00020; }
       <div id="donate" class="section">
         <div class="main-box">
           <div class="sh">donate / send crypto</div>
-          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever — even small stuff lands.</p>
+          <p class="mt">bitcoin, ethereum, solana, xrp. no platforms, no fees between us. send whatever, even small stuff lands.</p>
           <div class="ww">
             <div class="wt">BITCOIN — BTC</div>
             <div class="wa" id="btcaddr">bc1qxhmhqwhra63prx5rf479fkzu5uwjkk5kzpfef4</div>
@@ -456,20 +461,6 @@ a:hover { color: #c00020; }
             <button class="cb" onclick="cp('xrpaddr',this)">copy address</button>
           </div>
           <p class="wnote">* only i hold the keys. not a service. just a wallet.</p>
-        </div>
-      </div>
-
-      <!-- LINKS -->
-      <div id="links" class="section">
-        <div class="main-box">
-          <div class="sh">links</div>
-          <p class="mt">places i like or think you should know about.</p>
-          <div style="margin-top:8px;">
-            <div class="link-entry"><a href="https://wiby.me" target="_blank">wiby.me</a><p>search engine for old-school hand-made websites only. a time machine.</p></div>
-            <div class="link-entry"><a href="https://are.na" target="_blank">are.na</a><p>moodboarding and research without the noise or the algorithm.</p></div>
-            <div class="link-entry"><a href="https://www.coinbase.com" target="_blank">coinbase</a><p>easiest way to get crypto if you're new to it.</p></div>
-            <div class="link-entry"><a href="https://archive.org" target="_blank">internet archive</a><p>the whole internet, preserved. everything lives here.</p></div>
-          </div>
         </div>
       </div>
 
@@ -523,6 +514,31 @@ a:hover { color: #c00020; }
 </div>
 
 <script>
+// ── VISITOR COUNTER ──
+// Uses a free public API (api.countapi.xyz) to persist and increment
+// a real visit count across all visitors.
+// Starting seed is 2418 so the first real visit begins from there.
+(function() {
+  var NAMESPACE = 'ostkrieg-site';
+  var KEY = 'visitors';
+  var SEED = 2418;
+  var el = document.getElementById('live-count');
+
+  // countapi.xyz: hit increments on every page load and returns new count
+  fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      // d.value starts at 1 on a fresh key, so we add the seed offset
+      var count = (d.value || 1) + SEED - 1;
+      el.textContent = count.toLocaleString();
+    })
+    .catch(function(){
+      // fallback: just show the seed so it never shows "..."
+      el.textContent = SEED.toLocaleString();
+    });
+})();
+
+// ── NAV ──
 function show(id, el) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -531,6 +547,7 @@ function show(id, el) {
   window.scrollTo(0,0);
 }
 
+// ── COPY WALLET ──
 function cp(id, btn) {
   var t = document.getElementById(id).textContent.trim();
   if (t.startsWith('coming')) {
@@ -544,7 +561,6 @@ function cp(id, btn) {
     setTimeout(() => { btn.textContent='copy address'; btn.classList.remove('ok'); }, 2000);
   });
 }
-
 </script>
 </body>
 </html>
