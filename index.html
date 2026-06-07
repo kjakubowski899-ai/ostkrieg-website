@@ -369,13 +369,13 @@ a:hover { color: #c00020; }
           <div class="cf">
             <img class="fr" src="wow.jpg" alt="" style="width:130px;">
             <p class="mt">
-              hey. ostkrieg's site. made it so i'd have somewhere online that's actually <b>mine.</b> not a profile. not a platform that can pull the plug.
+              ostkrieg's site. put it up because i wanted something online that's actually mine. not a profile. not something tied to a platform that can disappear on you.
             </p>
             <p class="mt">
-              i work in security. been at it a while. pays well. wallets are up on the donate page if you want to send something over.
+              work in security. been at it long enough. pays well. not really something i talk about. wallets are on the donate page if you want to send something.
             </p>
             <p class="mt">
-              look around. you were here.
+              look around. enjoy yourself. you were here.
             </p>
           </div>
         </div>
@@ -431,7 +431,9 @@ a:hover { color: #c00020; }
           <div class="sh">contact</div>
           <div class="cf">
             <img class="fr" src="c28.jpg" alt="" style="width:110px;">
-            <p class="mt">if you want to reach me, you already know how.</p>
+            <p class="mt">if you want to reach me, you already know how. if you don't, you're not supposed to.</p>
+            <p class="mt">not hard to find people who know people. that's how it works.</p>
+            <p class="mt">also learn to enjoy life. seriously. the obsession with being locked in all the time will hinder you more than anything else ever could.</p>
           </div>
         </div>
       </div>
@@ -541,7 +543,7 @@ a:hover { color: #c00020; }
 
 // ── NAV ──
 function show(id, el) {
-  var snd = new Audio('moan.mp3');
+  var snd = new Audio('splat.mp3');
   snd.play();
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -551,6 +553,8 @@ function show(id, el) {
 }
 
 function cp(id, btn) {
+  var moan = new Audio('moan.mp3');
+  moan.play();
   var t = document.getElementById(id).textContent.trim();
   if (t.startsWith('coming')) {
     btn.textContent = 'not set yet';
