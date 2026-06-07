@@ -540,6 +540,8 @@ a:hover { color: #c00020; }
 
 // ── NAV ──
 function show(id, el) {
+  var snd = new Audio('splat.mp3');
+  snd.play();
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('#nav a').forEach(a => a.classList.remove('on'));
