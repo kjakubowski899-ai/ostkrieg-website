@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ostkrieg — personal site</title>
+<title>ostkrieg</title>
+<link rel="icon" type="image/jpeg" href="weed.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -540,7 +541,7 @@ a:hover { color: #c00020; }
 
 // ── NAV ──
 function show(id, el) {
-  var snd = new Audio('splat.mp3');
+  var snd = new Audio('moan.mp3');
   snd.play();
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -549,7 +550,6 @@ function show(id, el) {
   window.scrollTo(0,0);
 }
 
-// ── COPY WALLET ──
 function cp(id, btn) {
   var t = document.getElementById(id).textContent.trim();
   if (t.startsWith('coming')) {
@@ -557,11 +557,35 @@ function cp(id, btn) {
     setTimeout(() => btn.textContent='copy address', 1500);
     return;
   }
-  navigator.clipboard.writeText(t).then(() => {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(t).then(() => {
+      btn.textContent = 'copied!';
+      btn.classList.add('ok');
+      setTimeout(() => { btn.textContent='copy address'; btn.classList.remove('ok'); }, 2000);
+    }).catch(() => fallbackCopy(t, btn));
+  } else {
+    fallbackCopy(t, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    document.execCommand('copy');
     btn.textContent = 'copied!';
     btn.classList.add('ok');
     setTimeout(() => { btn.textContent='copy address'; btn.classList.remove('ok'); }, 2000);
-  });
+  } catch(e) {
+    btn.textContent = 'copy failed';
+    setTimeout(() => btn.textContent='copy address', 2000);
+  }
+  document.body.removeChild(ta);
 }
 </script>
 </body>
